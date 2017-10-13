@@ -6,6 +6,13 @@ import com.wordpress.carledwinjspring.boot.mockito.api.model.Product;
 
 public class ProductService {
 
+	public ProductService() {
+	}
+	
+	public ProductService(ProductDAO dao) {
+		this.dao = dao;
+	}
+	
 	private ProductDAO dao;
 	
 	public void setDao(ProductDAO dao) {
@@ -27,5 +34,9 @@ public class ProductService {
 		transactionStatus = true;
 		
 		return transactionStatus;
+	}
+	
+	public ProductDAO getDao() {
+		return dao;
 	}
 }

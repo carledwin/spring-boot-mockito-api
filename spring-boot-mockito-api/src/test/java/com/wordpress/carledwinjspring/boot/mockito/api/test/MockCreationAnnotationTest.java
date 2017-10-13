@@ -29,6 +29,7 @@ public class MockCreationAnnotationTest {
 	public void setupMock() {
 		
 		MockitoAnnotations.initMocks(this);
+		service = new ProductService(this.dao);
 	}
 	
 	@Test
@@ -36,6 +37,8 @@ public class MockCreationAnnotationTest {
 		
 		assertNotNull(dao);
 		assertNotNull(product);
+		assertNotNull(service);
+		assertNotNull(service.getDao());
 	}
 	
 	@Test
@@ -45,9 +48,9 @@ public class MockCreationAnnotationTest {
 		
 		assertEquals(30, dao.getAvailableProducts(product));
 		
-		service.buy(product, 5);
+		assertTrue("service.buy >> True ", service.buy(product, 5));
 		
-		verify(dao).getAvailableProducts(product);
+		verify(dao).orderProduct(product, 5);
 		
 	}
 	
